@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Cast Vote</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="logo-title">
+                <img src="images/logo.png" class="logo" alt="Logo" />
+                <h1>Online Voting</h1>
+            </div>
+            <div>
+                <a href="home.html">Home</a>
+                <a href="index.html">Parties</a>
+                <a href="vote.html" class="active">Vote</a>
+                <a href="results.html">Results</a>
+                <a href="info.html">Info</a>
+                <a href="security.html">Security</a>
+            </div>
+        </nav>
+
+        <section class="container">
+            <h2>Voter Information</h2>
+
+            <form id="voteForm" class="form">
+                <div class="grid">
+                    <input
+                        type="text"
+                        placeholder="Full Name"
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="NID Number"
+                        required
+                    />
+                    <input type="date" required />
+                    <input
+                        type="text"
+                        placeholder="Nationality"
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Location"
+                        required
+                    />
+                </div>
+
+                <h3>Select Party</h3>
+
+                <div class="party-options">
+                    <label class="option">
+                        <input
+                            type="radio"
+                            name="party"
+                            value="National"
+                            z`
+                            hidden
+                        />
+                        <div class="option-card">National Party</div>
+                    </label>
+
+                    <label class="option">
+                        <input
+                            type="radio"
+                            name="party"
+                            value="United"
+                            hidden
+                        />
+                        <div class="option-card">United Party</div>
+                    </label>
+
+                    <label class="option">
+                        <input
+                            type="radio"
+                            name="party"
+                            value="Covered"
+                            hidden
+                        />
+                        <div class="option-card">Covered Party</div>
+                    </label>
+                </div>
+
+                <button type="submit" class="vote-btn">
+                    Cast Vote
+                </button>
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>
