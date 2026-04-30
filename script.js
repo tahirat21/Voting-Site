@@ -9,6 +9,19 @@ if (!localStorage.getItem("votes")) {
     );
 }
 
+if (!localStorage.getItem("voters")) {
+    localStorage.setItem("voters", JSON.stringify({}));
+}
+
+function generateVoteCode(party, nid) {
+    const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const timePart = Date.now().toString(36).toUpperCase();
+    const partyCode = party.slice(0, 3).toUpperCase();
+    const nidSuffix = nid.slice(-4).toUpperCase();
+
+    return `${partyCode}-${timePart}-${nidSuffix}-${randomPart}`;
+}
+
 const form = document.getElementById("voteForm");
 if (form) {
     form.addEventListener("submit", function (e) {
@@ -18,18 +31,59 @@ if (form) {
             "input[name='party']:checked",
         );
         const message = document.getElementById("message");
+        const nidInput = document.getElementById("nidNumber");
+        const fullNameInput = document.getElementById("fullName");
+        const dobInput = document.getElementById("dob");
+        const nationalityInput = document.getElementById("nationality");
+        const locationInput = document.getElementById("location");
 
         if (!selected) {
             message.textContent = "Please select a party.";
             return;
         }
 
+        const nid = nidInput.value.trim();
+        if (!nid) {
+            message.textContent = "Please enter your NID Number.";
+            return;
+        }
+
+        const voters = JSON.parse(localStorage.getItem("voters"));
+        if (voters[nid]) {
+            message.textContent =
+                "This NID has already voted. Duplicate voting is not allowed.";
+            return;
+        }
+
+        const voteCode = generateVoteCode(selected.value, nid);
+        voters[nid] = {
+            code: voteCode,
+            party: selected.value,
+            fullName: fullNameInput.value.trim(),
+            dob: dobInput.value,
+            nationality: nationalityInput.value.trim(),
+            location: locationInput.value.trim(),
+            submittedAt: new Date().toISOString(),
+        };
+
         let votes = JSON.parse(localStorage.getItem("votes"));
         votes[selected.value]++;
         localStorage.setItem("votes", JSON.stringify(votes));
+        localStorage.setItem("voters", JSON.stringify(voters));
 
-        message.textContent = "Vote submitted successfully!";
+        message.textContent =
+            `Vote submitted successfully! Your vote code is ${voteCode}`;
+        form.reset();
     });
+
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener("click", function () {
+            localStorage.setItem("voters", JSON.stringify({}));
+            document.getElementById("message").textContent =
+                "Voter history cleared successfully.";
+        });
+    }
 }
 
 const canvas = document.getElementById("chart");

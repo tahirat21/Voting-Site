@@ -31,22 +31,26 @@
             <form id="voteForm" class="form">
                 <div class="grid">
                     <input
+                        id="fullName"
                         type="text"
                         placeholder="Full Name"
                         required
                     />
                     <input
+                        id="nidNumber"
                         type="text"
                         placeholder="NID Number"
                         required
                     />
-                    <input type="date" required />
+                    <input id="dob" type="date" required />
                     <input
+                        id="nationality"
                         type="text"
                         placeholder="Nationality"
                         required
                     />
                     <input
+                        id="location"
                         type="text"
                         placeholder="Location"
                         required
@@ -61,7 +65,6 @@
                             type="radio"
                             name="party"
                             value="National"
-                            z`
                             hidden
                         />
                         <div class="option-card">National Party</div>
@@ -90,6 +93,9 @@
 
                 <button type="submit" class="vote-btn">
                     Cast Vote
+                </button>
+                <button type="button" id="clearHistoryBtn" class="vote-btn secondary">
+                    Clear Voter History
                 </button>
             </form>
 
