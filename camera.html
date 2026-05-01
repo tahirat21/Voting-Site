@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Camera Verification</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="logo-title">
+                <img src="images/logo.png" class="logo" alt="Logo" />
+                <h1>Online Voting</h1>
+            </div>
+            <div>
+                <a href="home.html">Home</a>
+                <a href="index.html">Parties</a>
+                <a href="vote.html">Vote</a>
+                <a href="results.html">Results</a>
+                <a href="info.html">Info</a>
+                <a href="security.html">Security</a>
+            </div>
+        </nav>
+
+        <section class="container">
+            <h2>Camera Verification</h2>
+            <div class="form">
+                <p>Please allow camera permission so we can verify your vote.</p>
+                <div class="camera-preview" style="margin-top: 1rem; display: none;">
+                    <video id="cameraPreview" autoplay playsinline muted style="width:100%; max-width:500px; border-radius:12px; background:#000;"></video>
+                </div>
+                <div
+                    id="cameraStatus"
+                    style="display: none; margin-top: 1rem; color: #2f3e46;"
+                ></div>
+                <p id="cameraMessage"></p>
+                <button
+                    id="backToVoteBtn"
+                    class="vote-btn secondary"
+                    style="display: none; margin-top: 1rem;"
+                >
+                    Back to Vote Page
+                </button>
+            </div>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>
